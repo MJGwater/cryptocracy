@@ -4,7 +4,7 @@ serverName: UUID
 # Show the deepstream logo on startup (highly recommended)
 showLogo: false
 # Log messages with this level and above. Valid levels are DEBUG, INFO, WARN, ERROR, OFF
-logLevel: ERROR
+logLevel: DEBUG
 # Directory where all plugins reside
 #libDir: ../lib
 
@@ -14,7 +14,7 @@ port: 6020
 # host for the websocket server
 host: 0.0.0.0
 # url path websocket connections connect to
-urlPath: /
+urlPath: /deepstream
 # url path for http health-checks, GET requests to this path will return 200 if deepstream is alive
 healthCheckPath: /health-check
 # webfacing URL under which this client is reachable. Used for loadbalancing / failover
@@ -32,7 +32,7 @@ sslCert: null
 sslCa: null
 
 # Logger Configuration
-# logger:
+logger:
 #   # use either the default logger
 #   name: default
 #    options:
@@ -41,35 +41,35 @@ sslCa: null
 #      logLevel: INFO
 
 #   # or the winston logger
-#   name: winston
-#   options:
-#     # specify a list of transports (console, file, time)
-#     -
-#       type: console
-#       options:
-#         # value of logLevel (line 4) will always overwrite this value
-#         level: info
-#         colorize: true
-#     -
-#       type: time
-#       options:
-#         filename: ../var/deepstream
+  name: winston
+  options:
+    # specify a list of transports (console, file, time)
+    -
+      type: console
+      options:
+        # value of logLevel (line 4) will always overwrite this value
+        level: info
+        colorize: true
+    -
+      type: time
+      options:
+        filename: ../var/deepstream
 
 #   # or a custom logger
 #   path: ./my-custom-logger
 
 # Plugin Configuration
 plugins:
-  message:
-    name: redis
-    options:
-      host: redis
-      port: 6379
-  cache:
-    name: redis
-    options:
-      host: redis
-      port: 6379
+  # message:
+  #   name: redis
+  #   options:
+  #     host: redis
+  #     port: 6379
+  # cache:
+  #   name: redis
+  #   options:
+  #     host: redis
+  #     port: 6379
   storage:
     name: rethinkdb
     options:
