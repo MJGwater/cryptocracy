@@ -20,5 +20,3 @@ CMD [ "node", "node_modules/.bin/deepstream"]
 
 # Expose HTTP Port
 EXPOSE 6020
-# Expose TCP Port
-# EXPOSE 6021

@@ -65,11 +65,11 @@ plugins:
   #   options:
   #     host: redis
   #     port: 6379
-  # cache:
-  #   name: redis
-  #   options:
-  #     host: redis
-  #     port: 6379
+  cache:
+    name: redis
+    options:
+      host: redis
+      port: 6379
   storage:
     name: rethinkdb
     options:
@@ -93,7 +93,11 @@ maxMessageSize: 1048576
 
 #Authentication
 auth:
-  type: none
+ type: http
+ options:
+   endpointUrl: http://accounts:3000/login
+   permittedStatusCodes: [ 200 ]
+   requestTimeout: 2000
 
 #   # reading users and passwords from a file
 #   type: file

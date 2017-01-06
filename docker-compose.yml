@@ -11,13 +11,13 @@ services:
             - redis
             - rethinkdb
     deepstream-search-provider:
-        image: deepstreamio/provider-search-rethinkdb
+        build: "./rethinkdb-search-provider"
         environment:
-            - DEEPSTREAM_HOST=deepstream
-            - DEEPSTREAM_PORT=6020
+            - DEEPSTREAM_AUTH_PASSWORD=12345
             - RETHINKDB_HOST=rethinkdb
         depends_on:
             - deepstream
+            - wallets
     redis:
         image: redis:alpine
         ports:
