@@ -10,6 +10,16 @@ services:
         depends_on:
             - redis
             - rethinkdb
+    client:
+        image: cryptocracy/client
+        ports:
+            - "80:80"
+        depends_on:
+            - deepstream
+            - wallets
+            - accounts
+            - balances
+            - trade
     wallets:
         image: cryptocracy/wallets
         ports:
