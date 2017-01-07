@@ -14,23 +14,32 @@ services:
         image: cryptocracy/wallets
         ports:
             - "8888:8888"
-        # environment:
-        # - DEEPSTREAM_AUTH_PASSWORD=12345
-        # - DEEPSTREAM_BCYPHERAPIKEY=APIKEYHERE
+        environment:
+        - DEEPSTREAM_AUTH_PASSWORD=12345
+        - DEEPSTREAM_BCYPHERAPIKEY=APIKEYHERE
+        depends_on:
+            - deepstream
+    accounts:
+        image: cryptocracy/accounts
+        ports:
+            - "8999:8999"
+        environment:
+        - DEEPSTREAM_AUTH_PASSWORD=12345
+        - DEEPSTREAM_BCYPHERAPIKEY=APIKEYHERE
         depends_on:
             - deepstream
     balances:
         image: cryptocracy/balances
-        # environment:
-        # - DEEPSTREAM_AUTH_PASSWORD=12345
-        # - DEEPSTREAM_BCYPHERAPIKEY=APIKEYHERE
+        environment:
+        - DEEPSTREAM_AUTH_PASSWORD=12345
+        - DEEPSTREAM_BCYPHERAPIKEY=APIKEYHERE
         depends_on:
             - deepstream
     trade:
         image: cryptocracy/trade
-        # environment:
-        # - DEEPSTREAM_AUTH_PASSWORD=12345
-        # - DEEPSTREAM_BCYPHERAPIKEY=APIKEYHERE
+        environment:
+        - DEEPSTREAM_AUTH_PASSWORD=12345
+        - DEEPSTREAM_BCYPHERAPIKEY=APIKEYHERE
         depends_on:
             - deepstream
     deepstream-search-provider:
