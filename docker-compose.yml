@@ -61,7 +61,7 @@ services:
             - deepstream
             - wallets
     redis:
-        image: redis:alpine:latest
+        image: redis:alpine
         ports:
             - "6379:6379"
     rethinkdb:
