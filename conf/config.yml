@@ -4,7 +4,7 @@ serverName: UUID
 # Show the deepstream logo on startup (highly recommended)
 showLogo: false
 # Log messages with this level and above. Valid levels are DEBUG, INFO, WARN, ERROR, OFF
-logLevel: DEBUG
+logLevel: ERROR
 # Directory where all plugins reside
 #libDir: ../lib
 
@@ -93,11 +93,12 @@ maxMessageSize: 1048576
 
 #Authentication
 auth:
- type: http
- options:
-   endpointUrl: http://accounts:3000/login
-   permittedStatusCodes: [ 200 ]
-   requestTimeout: 2000
+ type: none
+#  http
+#  options:
+#    endpointUrl: http://accounts:3000/login
+#    permittedStatusCodes: [ 200 ]
+#    requestTimeout: 2000
 
 #   # reading users and passwords from a file
 #   type: file
