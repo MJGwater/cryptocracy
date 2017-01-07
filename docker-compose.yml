@@ -1,7 +1,7 @@
 version: '2'
 services:
     deepstream:
-        image: cryptocracy/server
+        image: cryptocracy/server:latest
         ports:
             - "6020:6020"
         volumes:
@@ -11,7 +11,7 @@ services:
             - redis
             - rethinkdb
     client:
-        image: cryptocracy/client
+        image: cryptocracy/client:latest
         ports:
             - "80:80"
         depends_on:
@@ -21,7 +21,7 @@ services:
             - balances
             - trade
     wallets:
-        image: cryptocracy/wallets
+        image: cryptocracy/wallets:latest
         ports:
             - "8888:8888"
         environment:
@@ -30,7 +30,7 @@ services:
         depends_on:
             - deepstream
     accounts:
-        image: cryptocracy/accounts
+        image: cryptocracy/accounts:latest
         ports:
             - "8999:8999"
         environment:
@@ -39,21 +39,21 @@ services:
         depends_on:
             - deepstream
     balances:
-        image: cryptocracy/balances
+        image: cryptocracy/balances:latest
         environment:
         - DEEPSTREAM_AUTH_PASSWORD=12345
         - DEEPSTREAM_BCYPHERAPIKEY=APIKEYHERE
         depends_on:
             - deepstream
     trade:
-        image: cryptocracy/trade
+        image: cryptocracy/trade:latest
         environment:
         - DEEPSTREAM_AUTH_PASSWORD=12345
         - DEEPSTREAM_BCYPHERAPIKEY=APIKEYHERE
         depends_on:
             - deepstream
     deepstream-search-provider:
-        image: cryptocracy/rethinkdb-search-provider
+        image: cryptocracy/rethinkdb-search-provider:latest
         environment:
             - DEEPSTREAM_AUTH_PASSWORD=12345
             - RETHINKDB_HOST=rethinkdb
@@ -61,11 +61,11 @@ services:
             - deepstream
             - wallets
     redis:
-        image: redis:alpine
+        image: redis:alpine:latest
         ports:
             - "6379:6379"
     rethinkdb:
-        image: rethinkdb
+        image: rethinkdb:latest
         ports:
             - "28015:28015"
             - "8080:8080"
