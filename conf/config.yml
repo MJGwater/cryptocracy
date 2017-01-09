@@ -4,7 +4,7 @@ serverName: UUID
 # Show the deepstream logo on startup (highly recommended)
 showLogo: false
 # Log messages with this level and above. Valid levels are DEBUG, INFO, WARN, ERROR, OFF
-logLevel: ERROR
+logLevel: DEBUG
 # Directory where all plugins reside
 #libDir: ../lib
 
