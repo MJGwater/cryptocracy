@@ -6,4 +6,4 @@
 3. Edit the docker-compose-development.yml script to mount your local code repo folder to the appropriate docker container.
 4. Run ```docker-compose -f [path to docker-compose-development.yml] up```
 5. You can access an awesome RethinkDB GUI at [http://localhost:8080](http://localhost:8080).
-6. To bring down the application run ```docker-compose down -v```
+6. To bring down the application run ```docker-compose -f [path to docker-compose-development.yml] down -v```
