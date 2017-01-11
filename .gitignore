@@ -40,3 +40,5 @@ rethinkdb_data/
 var/
 .vscode
 lib
+deepstream
+doc

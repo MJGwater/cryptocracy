@@ -1,0 +1,52 @@
+version: '2'
+services:
+    deepstream:
+        extends:
+            file: docker-compose-common.yml
+            service: deepstream
+    client:
+        extends:
+            file: docker-compose-common.yml
+            service: client
+    # Admin should not be available in production.
+    wallets:
+        extends:
+            file: docker-compose-common.yml
+            service: wallets
+        environment:
+            - DEEPSTREAM_AUTH_PASSWORD=12345
+    accounts:
+        extends:
+            file: docker-compose-common.yml
+            service: accounts
+        environment:
+            - DEEPSTREAM_AUTH_PASSWORD=12345
+    balances:
+        extends:
+            file: docker-compose-common.yml
+            service: balances
+        environment:
+            - DEEPSTREAM_AUTH_PASSWORD=12345
+    trade:
+        extends:
+            file: docker-compose-common.yml
+            service: trade
+        environment:
+        - DEEPSTREAM_AUTH_PASSWORD=12345
+    redis:
+        extends:
+            file: docker-compose-common.yml
+            service: redis
+    rethinkdb:
+        extends:
+            file: docker-compose-common.yml
+            service: rethinkdb
+        image: rethinkdb
+        volumes:
+            - ./rethinkdb_data:/data/rethinkdb_data
+    rethinkdb-search-provider:
+        extends:
+            file: docker-compose-common.yml
+            service: rethinkdb-search-provider
+        environment:
+            - DEEPSTREAM_AUTH_PASSWORD=12345

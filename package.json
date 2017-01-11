@@ -1,0 +1,28 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "To get your development environment up and running on a mac, [download](https://download.docker.com/mac/stable/Docker.dmg) and [install](https://docs.docker.com/docker-for-mac/) docker. Once Docker is up and running, open a terminal window and run:  ```git clone https://github.com/CryptocracyExchange/cryptocracy.git && cd ./cryptocracy && docker-compose up``` When the server, database, and search provider are up and running, you can then connect your client directly to deepstream. To kill the server press ```ctrl+c```, and run ```docker-compose up``` to get it started again. You can access an awesome RethinkDB GUI at [http://localhost:8080](http://localhost:8080).",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CryptocracyExchange/cryptocracy.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CryptocracyExchange/cryptocracy/issues"
+  },
+  "homepage": "https://github.com/CryptocracyExchange/cryptocracy#readme",
+  "dependencies": {
+    "deepstream.io": "^2.1.2",
+    "deepstream.io-cache-redis": "^1.0.2",
+    "deepstream.io-msg-redis": "^1.0.2",
+    "deepstream.io-storage-rethinkdb": "^1.0.2"
+  }
+}

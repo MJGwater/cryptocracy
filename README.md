@@ -1,4 +1,9 @@
 # Cryptocracy #
 ## Development ##
-To get your development environment up and running on a mac, [download](https://download.docker.com/mac/stable/Docker.dmg) and [install](https://docs.docker.com/docker-for-mac/) docker. Once Docker is up and running, open a terminal window and run: 
-```git clone https://github.com/CryptocracyExchange/cryptocracy.git && cd ./cryptocracy && docker-compose up``` When the server, database, and search provider are up and running, you can then connect your client directly to deepstream. To kill the server press ```ctrl+c```, and run ```docker-compose up``` to get it started again. You can access an awesome RethinkDB GUI at [http://localhost:8080](http://localhost:8080).
+1. On a mac, [download](https://download.docker.com/mac/stable/Docker.dmg) and [install](https://docs.docker.com/docker-for-mac/) docker.
+2. Clone the repo that you want to work on to your local machine.
+3. Clone down the main server repo (this one).
+3. Edit the docker-compose-development.yml script to mount your local code repo folder to the appropriate docker container.
+4. Run ```docker-compose up -f [path to docker-compose-development.yml]```
+5. You can access an awesome RethinkDB GUI at [http://localhost:8080](http://localhost:8080).
+6. To bring down the application run ```docker-compose down -v```

@@ -4,12 +4,9 @@ services:
         image: cryptocracy/server
         ports:
             - "6020:6020"
-        volumes:
-            - ./conf:/usr/local/deepstream/conf
-            - ./var:/usr/local/deepstream/var
         depends_on:
-            - redis
             - rethinkdb
+            - redis
     client:
         image: cryptocracy/client
         ports:
@@ -25,7 +22,6 @@ services:
         ports:
             - "8888:8888"
         environment:
-        - DEEPSTREAM_AUTH_PASSWORD=12345
         - DEEPSTREAM_BCYPHERAPIKEY=APIKEYHERE
         depends_on:
             - deepstream
@@ -33,30 +29,14 @@ services:
         image: cryptocracy/accounts
         ports:
             - "8999:8999"
-        environment:
-        - DEEPSTREAM_AUTH_PASSWORD=12345
-        - DEEPSTREAM_BCYPHERAPIKEY=APIKEYHERE
         depends_on:
             - deepstream
     balances:
-        image: cryptocracy/balances
-        environment:
-        - DEEPSTREAM_AUTH_PASSWORD=12345
-        - DEEPSTREAM_BCYPHERAPIKEY=APIKEYHERE
+        build: "../balances"
         depends_on:
             - deepstream
     trade:
         image: cryptocracy/trade
-        environment:
-        - DEEPSTREAM_AUTH_PASSWORD=12345
-        - DEEPSTREAM_BCYPHERAPIKEY=APIKEYHERE
-        depends_on:
-            - deepstream
-    deepstream-search-provider:
-        image: cryptocracy/rethinkdb-search-provider
-        environment:
-            - DEEPSTREAM_AUTH_PASSWORD=12345
-            - RETHINKDB_HOST=rethinkdb
         depends_on:
             - deepstream
     redis:
@@ -67,6 +47,9 @@ services:
         image: rethinkdb
         ports:
             - "28015:28015"
-            - "8080:8080"
-        volumes:
-            - ./rethinkdb_data:/data/rethinkdb_data
+    rethinkdb-search-provider:
+        image: cryptocracy/rethinkdb-search-provider
+        environment:
+            - RETHINKDB_HOST=rethinkdb
+        depends_on:
+            - deepstream
