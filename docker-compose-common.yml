@@ -13,7 +13,7 @@ services:
         ports:
             - "8888:8888"
         environment:
-        - DEEPSTREAM_BCYPHERAPIKEY=78fcc14d629f4555bd8a1cdc97b2ff7d
+        - DEEPSTREAM_BCYPHERAPIKEY=
     accounts:
         image: cryptocracy/accounts
         ports:
