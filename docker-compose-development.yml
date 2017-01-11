@@ -77,8 +77,8 @@ services:
             - DEEPSTREAM_AUTH_PASSWORD=12345
         depends_on:
             - deepstream
-        volumes:
-        - ../trade:/usr/local/trade
+        # volumes:
+        # - ../trade:/usr/local/trade
     redis:
         extends:
             file: docker-compose-common.yml
