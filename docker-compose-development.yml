@@ -8,6 +8,9 @@ services:
         extends:
             file: docker-compose-common.yml
             service: deepstream
+        depends_on:
+            - rethinkdb
+            - redis
         # volumes:
         #     - ./conf:/usr/local/deepstream/conf
         #     - ./var:/usr/local/deepstream/var
@@ -16,6 +19,12 @@ services:
         extends:
             file: docker-compose-common.yml
             service: client
+        depends_on:
+            - deepstream
+            - wallets
+            - accounts
+            - balances
+            - trade
         # volumes:
         # - ../client:/usr/local/client
     admin:
@@ -36,6 +45,8 @@ services:
             service: wallets
         environment:
             - DEEPSTREAM_AUTH_PASSWORD=12345
+        depends_on:
+            - deepstream
         # volumes:
         #     - ../wallets:/usr/local/wallets
     accounts:
@@ -44,6 +55,8 @@ services:
             service: accounts
         environment:
             - DEEPSTREAM_AUTH_PASSWORD=12345
+        depends_on:
+            - deepstream
         # volumes: 
         #     - ../accounts:/usr/local/accounts
     balances:
@@ -52,6 +65,8 @@ services:
             service: balances
         environment:
             - DEEPSTREAM_AUTH_PASSWORD=12345
+        depends_on:
+            - deepstream
         # volumes:
         # - ../balances:/usr/local/balances
     trade:
@@ -59,8 +74,10 @@ services:
             file: docker-compose-common.yml
             service: trade
         environment:
-        - DEEPSTREAM_AUTH_PASSWORD=12345
-        # volumes: 
+            - DEEPSTREAM_AUTH_PASSWORD=12345
+        depends_on:
+            - deepstream
+        # volumes:
         # - ../trade:/usr/local/trade
     redis:
         extends:
@@ -81,3 +98,5 @@ services:
             service: rethinkdb-search-provider
         environment:
             - DEEPSTREAM_AUTH_PASSWORD=12345
+        depends_on:
+            - deepstream

@@ -4,10 +4,19 @@ services:
         extends:
             file: docker-compose-common.yml
             service: deepstream
+        depends_on:
+            - rethinkdb
+            - redis
     client:
         extends:
             file: docker-compose-common.yml
             service: client
+        depends_on:
+            - deepstream
+            - wallets
+            - accounts
+            - balances
+            - trade
     # Admin should not be available in production.
     wallets:
         extends:
@@ -15,24 +24,32 @@ services:
             service: wallets
         environment:
             - DEEPSTREAM_AUTH_PASSWORD=12345
+        depends_on:
+            - deepstream
     accounts:
         extends:
             file: docker-compose-common.yml
             service: accounts
         environment:
             - DEEPSTREAM_AUTH_PASSWORD=12345
+        depends_on:
+            - deepstream
     balances:
         extends:
             file: docker-compose-common.yml
             service: balances
         environment:
             - DEEPSTREAM_AUTH_PASSWORD=12345
+        depends_on:
+            - deepstream
     trade:
         extends:
             file: docker-compose-common.yml
             service: trade
         environment:
-        - DEEPSTREAM_AUTH_PASSWORD=12345
+            - DEEPSTREAM_AUTH_PASSWORD=12345
+        depends_on:
+            - deepstream
     redis:
         extends:
             file: docker-compose-common.yml
@@ -50,3 +67,5 @@ services:
             service: rethinkdb-search-provider
         environment:
             - DEEPSTREAM_AUTH_PASSWORD=12345
+        depends_on:
+            - deepstream

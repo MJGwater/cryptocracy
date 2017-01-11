@@ -4,41 +4,24 @@ services:
         image: cryptocracy/server
         ports:
             - "6020:6020"
-        depends_on:
-            - rethinkdb
-            - redis
     client:
         image: cryptocracy/client
         ports:
             - "80:80"
-        depends_on:
-            - deepstream
-            - wallets
-            - accounts
-            - balances
-            - trade
     wallets:
         image: cryptocracy/wallets
         ports:
             - "8888:8888"
         environment:
-        - DEEPSTREAM_BCYPHERAPIKEY=APIKEYHERE
-        depends_on:
-            - deepstream
+        - DEEPSTREAM_BCYPHERAPIKEY=78fcc14d629f4555bd8a1cdc97b2ff7d
     accounts:
         image: cryptocracy/accounts
         ports:
             - "8999:8999"
-        depends_on:
-            - deepstream
     balances:
-        build: "../balances"
-        depends_on:
-            - deepstream
+        image: cryptocracy/balances
     trade:
         image: cryptocracy/trade
-        depends_on:
-            - deepstream
     redis:
         image: redis:alpine
         ports:
@@ -51,5 +34,3 @@ services:
         image: cryptocracy/rethinkdb-search-provider
         environment:
             - RETHINKDB_HOST=rethinkdb
-        depends_on:
-            - deepstream
