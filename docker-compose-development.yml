@@ -40,6 +40,15 @@ services:
             - PORT=88
         # volumes:
         #     - ../admin:/usr/local/admin
+    dataanalysis:
+        image: cryptocracy/dataanalysis
+        depends_on:
+            - deepstream
+            - accounts
+        environment:
+            - DEEPSTREAM_AUTH_PASSWORD=12345
+        # volumes:
+        #     - ../dataanalysis:/usr/local/dataanalysis
     wallets:
         image: cryptocracy/wallets
         ports:
