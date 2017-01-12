@@ -21,8 +21,8 @@ services:
             - "80:80"
         depends_on:
             - deepstream
-            - wallets
             - accounts
+            - wallets
             - balances
             - trade
         # volumes:
@@ -31,6 +31,7 @@ services:
         image: cryptocracy/admin
         depends_on:
             - deepstream
+            - accounts
         environment:
             - DEEPSTREAM_AUTH_PASSWORD=12345
         ports:
@@ -47,6 +48,7 @@ services:
             - DEEPSTREAM_BCYPHERAPIKEY=
         depends_on:
             - deepstream
+            - accounts
         # volumes:
         #     - ../wallets:/usr/local/wallets
     accounts:
@@ -65,6 +67,7 @@ services:
             - DEEPSTREAM_AUTH_PASSWORD=12345
         depends_on:
             - deepstream
+            - accounts
         # volumes:
         # - ../balances:/usr/local/balances
     trade:
@@ -73,6 +76,7 @@ services:
             - DEEPSTREAM_AUTH_PASSWORD=12345
         depends_on:
             - deepstream
+            - accounts
         # volumes:
         # - ../trade:/usr/local/trade
     redis:
@@ -93,3 +97,4 @@ services:
             - DEEPSTREAM_AUTH_PASSWORD=12345
         depends_on:
             - deepstream
+            - accounts
