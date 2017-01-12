@@ -1,71 +1,78 @@
 version: '2'
 services:
     deepstream:
-        extends:
-            file: docker-compose-common.yml
-            service: deepstream
+        image: cryptocracy/server
+        ports:
+            - "6020:6020"
         depends_on:
             - rethinkdb
             - redis
+        # volumes:
+        #     - ./conf:/usr/local/deepstream/conf
+        #     - ./var:/usr/local/deepstream/var
+        #     - ./lib:/usr/local/deepstream/lib
     client:
-        extends:
-            file: docker-compose-common.yml
-            service: client
+        image: cryptocracy/client
+        ports:
+            - "80:80"
         depends_on:
             - deepstream
             - wallets
             - accounts
             - balances
             - trade
-    # Admin should not be available in production.
+        # volumes:
+        #     - ../client:/usr/local/client
     wallets:
-        extends:
-            file: docker-compose-common.yml
-            service: wallets
+        image: cryptocracy/wallets
+        ports:
+            - "8888:8888"
         environment:
-            - DEEPSTREAM_AUTH_PASSWORD=12345
+            - DEEPSTREAM_BCYPHERAPIKEY=
         depends_on:
             - deepstream
+        # volumes:
+        #     - ../wallets:/usr/local/wallets
     accounts:
-        extends:
-            file: docker-compose-common.yml
-            service: accounts
+        image: cryptocracy/accounts
+        ports:
+            - "8999:8999"
         environment:
             - DEEPSTREAM_AUTH_PASSWORD=12345
         depends_on:
             - deepstream
+        # volumes: 
+        #     - ../accounts:/usr/local/accounts
     balances:
-        extends:
-            file: docker-compose-common.yml
-            service: balances
+        image: cryptocracy/balances
         environment:
             - DEEPSTREAM_AUTH_PASSWORD=12345
         depends_on:
             - deepstream
+        # volumes:
+        # - ../balances:/usr/local/balances
     trade:
-        extends:
-            file: docker-compose-common.yml
-            service: trade
+        image: cryptocracy/trade
         environment:
             - DEEPSTREAM_AUTH_PASSWORD=12345
         depends_on:
             - deepstream
+        # volumes:
+        # - ../trade:/usr/local/trade
     redis:
-        extends:
-            file: docker-compose-common.yml
-            service: redis
+        image: redis:alpine
+        ports:
+            - "6379:6379"
     rethinkdb:
-        extends:
-            file: docker-compose-common.yml
-            service: rethinkdb
         image: rethinkdb
+        ports:
+            - "28015:28015"
         volumes:
             - ./rethinkdb_data:/data/rethinkdb_data
     rethinkdb-search-provider:
-        extends:
-            file: docker-compose-common.yml
-            service: rethinkdb-search-provider
+        image: cryptocracy/rethinkdb-search-provider
         environment:
+            - RETHINKDB_HOST=rethinkdb
             - DEEPSTREAM_AUTH_PASSWORD=12345
         depends_on:
             - deepstream
