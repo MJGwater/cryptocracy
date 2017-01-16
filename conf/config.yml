@@ -59,7 +59,11 @@ maxMessageSize: 1048576 # maximum allowed size of an individual message in bytes
 
 #Authentication
 auth:
-  type: none
+ type: http
+ options:
+    endpointUrl: http://accounts:8999/login
+    permittedStatusCodes: [ 200 ]
+    requestTimeout: 2000
 
 # # reading users and passwords from a file
 #   type: file
