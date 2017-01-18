@@ -1,18 +1,81 @@
 presence:
   "*":
     allow: true
+
 record:
+  "trollbox": # done
+    write: "user.userID === 'trollbox-service' && user.role === 'provider'"
+    delete: "user.userID === 'trollbox-service' && user.role === 'provider'"
+    create: "user.userID === 'trollbox-service' && user.role === 'provider' || user.role === 'user'"
+    read: "user.role === 'provider' || user.role === 'user'"
+    listen: "user.role === 'provider' || user.role === 'user'"
+  "rates": # done
+    write: "user.role === 'provider'"
+    delete: "user.role === 'provider'"
+    create: "user.role === 'provider'"
+    read: "user.role === 'provider' || user.role === 'user'"
+    listen: "user.role === 'provider' || user.role === 'user'"
+  "open":
+    write: "user.userID === 'trade-service' && user.role === 'provider'"
+    delete: "user.userID === 'trade-service' && user.role === 'provider'"
+    create: "user.userID === 'trade-service' && user.role === 'provider'"
+    read: true
+    listen: true
+  "closed":
+    write: "user.userID === 'trade-service' && user.role === 'provider'"
+    delete: "user.userID === 'trade-service' && user.role === 'provider'"
+    create: "user.userID === 'trade-service' && user.role === 'provider'"
+    read: true
+    listen: true
+  "email":
+    write: "user.userID === 'accounts-service' && user.role === 'provider'"
+    delete: "user.userID === 'accounts-service' && user.role === 'provider'"
+    create: "user.userID === 'accounts-service' && user.role === 'provider'"
+    read: "user.userID === $USERID || user.role === 'provider'"
+    listen: "user.userID === $USERID || user.role === 'provider'"
+  "user": # Ready to test
+    write: "(user.userID === 'accounts-service' || user.userID === 'admin-service') && user.role === 'provider'"
+    delete: "(user.userID === 'accounts-service' || user.userID === 'admin-service') && user.role === 'provider'"
+    create: "(user.userID === 'accounts-service' || user.userID === 'admin-service') && user.role === 'provider'"
+    read: "(user.userID === 'accounts-service' || user.userID === 'admin-service') && user.role === 'provider'"
+    listen: "user.userID === $USERID || user.role === 'provider'"
+  "wallets/$USERID": # done
+    write: "user.userID === 'wallets-service' && user.role === 'provider'"
+    delete: "user.userID === 'wallets-service' && user.role === 'provider'"
+    create: "user.userID === 'wallets-service' && user.role === 'provider'"
+    read: "user.userID === $USERID"
+    listen: "user.userID === $USERID"
+  "hotwallets": # done
+    write: "user.userID === 'wallets-service' && user.role === 'provider'"
+    delete: "user.userID === 'wallets-service' && user.role === 'provider'"
+    create: "user.userID === 'wallets-service' && user.role === 'provider'"
+    read: "user.userID === 'wallets-service' && user.role === 'provider'"
+    listen: "user.userID === 'wallets-service' && user.role === 'provider'"
+  "balances$USERID": # done
+    write: "user.userID === 'balances-service' && user.role === 'provider'"
+    delete: "user.userID === 'balances-service' && user.role === 'provider'"
+    create: "user.userID === 'balances-service' && user.role === 'provider'"
+    read: "user.role === 'provider' || (user.userID === $USERID && user.role === 'user')"
+    listen: "user.role === 'provider' || (user.userID === $USERID && user.role === 'user')"
+  # "search?$queryString":
+  #   create: true
+  #   write: "user.role === 'provider'"
+  #   read: true
+  #   delete: true
+  #   listen: true
   "*":
     create: true
     write: true
     read: true
     delete: true
     listen: true
+
 event:
   "*":
     publish: true
     subscribe: true
     listen: true
+
 rpc:
   "*":
     provide: true
