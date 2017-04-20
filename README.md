@@ -6,7 +6,7 @@
   - __Scrum Master__: Matt Goldwater
   - __Team Members__: Harry Bellenie, Kai Hsia
 
-##Synopsis
+## Synopsis
 
 Make speedy and secure cryptocurrency trades.
 
